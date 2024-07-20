@@ -17,6 +17,27 @@ void insertHead(Node ** head, int data){
     *head = newNode;
 }
 
+void insertTail(Node **head, int data){
+    if(*head == NULL){
+        Node * newNode = (Node *) malloc(sizeof(Node));
+        newNode->data = data;
+        newNode->next = NULL;
+        (*head) = newNode;
+        return;
+    }
+    insertTail(&((*head)->next), data);
+}
+
+void printList(Node * head){
+    if(head == NULL){
+        printf("NULL\n");
+        return;
+    }
+
+    printf("%d -> ", head->data);
+    printList(head->next);
+}
+
 int main(){
     Node * head = NULL;
     
@@ -26,11 +47,11 @@ int main(){
     insertHead(&head, 2);
     insertHead(&head, 1);
     insertHead(&head, 0);
+    insertTail(&head, -1);
+    insertTail(&head, -2);
+    insertTail(&head, -3);
+    insertTail(&head, -4);
+    insertTail(&head, -5);
 
-    while(head != NULL){
-        printf("%d -> ", head->data);
-        head = head->next;
-    }
-    printf("NULL");
-    printf("\n");
+    printList(head);
 }
