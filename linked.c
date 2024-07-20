@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct Node Node;
 
@@ -40,18 +41,50 @@ void printList(Node * head){
 
 int main(){
     Node * head = NULL;
-    
-    insertHead(&head, 5);
-    insertHead(&head, 4);
-    insertHead(&head, 3);
-    insertHead(&head, 2);
-    insertHead(&head, 1);
-    insertHead(&head, 0);
-    insertTail(&head, -1);
-    insertTail(&head, -2);
-    insertTail(&head, -3);
-    insertTail(&head, -4);
-    insertTail(&head, -5);
+    int option = 0;
+    while(true){
+        printf("Linked List Menu: \n");
+        printf("1. Insert New Node: \n");
+        printf("2. Delete Node \n");
+        printf("3. Print List \n");
+        printf("4. Exit \n");
+        scanf("%d", &option);
+        switch (option)
+        {
+        case 1:
+            printf("Insert To 1.Head or 2.Tail?\n");
+            int inChoice = 0;
+            scanf("%d", &inChoice);
+            if(inChoice == 1){
+                printf("Enter the Data for the New Node: \n");
+                int data;
+                scanf("%d", &data);
+                insertHead(&head, data);
+            }
+            else if(inChoice == 2){
+                printf("Enter the Data for the New Node: \n");
+                int data;
+                scanf("%d", &data);
+                insertHead(&head, data);
+            }
+            else{
+                printf("Incorrect Option, Try Again\n");
+            }
+            break;
+        case 2:
+            break;
+        case 3:
+            printList(head);
+            break;
+        case 4:
+            printf("BYEBYE\n");
+            exit(0);
+            break;
+        default:
+            break;
+        }
+
+    }
 
     printList(head);
 }
