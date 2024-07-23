@@ -19,6 +19,13 @@ void initQueue(Queue *qPtr){
     qPtr->front = qPtr->back = NULL;
 }
 
+Node* makeNode(int val) {
+    Node* tmp = (Node *) malloc(sizeof(Node));
+    tmp->data = val;
+    tmp->next = NULL;
+    return tmp;
+}
+
 int enqueue(Queue * qPtr, int data){
     //create a temporary Node pointer to access node structs fields
     Node * temp = (Node *) malloc(sizeof(Node));
@@ -61,6 +68,18 @@ int dequeue(Queue * qptr){
     return ret;
 }
 
+void addFront(Queue * qPtr, int data){
+    Node * newNode = makeNode(data);
+
+    if(!qPtr->front){
+        qPtr->front = qPtr->back = newNode;
+        return;
+    }
+
+    newNode->next = qPtr->front;
+    qPtr->front = newNode;
+}
+
 void printQueue(Node *front) {
     //if the list is empty or reached the end, return
     if(front == NULL){
@@ -85,6 +104,8 @@ int main(){
     printQueue(qPtr->front);
     printf("<- Back\n");
     printf("Currently Dequeueing %d\n", dequeue(qPtr));
+    addFront(qPtr, 14);
+    addFront(qPtr, 15);
     printf("Front ");
     printQueue(qPtr->front);
     printf("<- Back\n");
