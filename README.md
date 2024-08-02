@@ -8,6 +8,7 @@ This is practice using Linked Lists. The purpose of this is to better understand
 * [Description](#Description)
 * [Installation](#Installation)
 * [Usage](#Usage)
+* [LeetCode](#LeetCode)
 * [License](#License)
 * [Contributions](#Contributions)
 * [Contact Me](#ContactUs)
@@ -19,6 +20,12 @@ Step 3. Run program using ./a.out filename
 
 ## Usage
 Each program has a menu with various options
+
+## LeetCode
+| Question  | Submission |
+| ------------- | ------------- |
+| [Remove Duplicates From Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/)  | [Solution](https://leetcode.com/submissions/detail/1341252009/)  |
+| [Remove Duplicates From Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/)  | [Solution](https://leetcode.com/submissions/detail/1341291157/)  |
 
 ## Credits
 Created by Jesus Molina
