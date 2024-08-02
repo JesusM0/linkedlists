@@ -80,6 +80,7 @@ Node * deleteByValue(Node *head, int data){
 
 }
 
+//LEETCODE QUESTION: Remove Duplicated 1
 //this will delete duplicates in a sorted list. Will leave only first occurrence.
 Node * deleteDuplicates(Node * head){
     if(head == NULL){
@@ -100,6 +101,7 @@ Node * deleteDuplicates(Node * head){
 
 }
 
+//LEETCODE QUESTION: Remove Duplicated 2
 Node * onlyDistinct(Node * head){
     if(head == NULL){
         return head;
@@ -129,6 +131,7 @@ Node * onlyDistinct(Node * head){
 
 }
 
+//FE QUESTION: Summer 2024
 Node * moveHeadNearTail(Node * head) {
     if(head->next->next == NULL){
         return head;
