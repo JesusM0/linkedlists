@@ -102,44 +102,30 @@ Node * deleteDuplicates(Node * head){
 
 Node * onlyDistinct(Node * head){
     if(head == NULL){
-        printf("reached NULL\n");
         return head;
     }
 
-    //if the next value is the same as the head
+    // Check if the next value is the same as the head
     if(head->next != NULL && head->next->data == head->data){
-        //delete next value and set new next
-        Node * tmp = head->next;
-        head->next = head->next->next;
+        // Remove all nodes with the same value as head
+        while(head->next != NULL && head->next->data == head->data){
+            Node * tmp = head->next;
+            head->next = head->next->next;
+            free(tmp);
+        }
+
+        // Now head->next is different or NULL
+        Node * tmp = head;
+        head = head->next;
         free(tmp);
 
-        //checking new-next value to see if its the same as current head
-        if(head->next != NULL && head->next->data != head->data){
-            Node * tmp = head->next;
-            head->next = head->next->next;
-            free(tmp);
-            //if not, then we set the new, not the same, value as the head
-            Node * headTmp = head;
-            head = head->next;
-            // printf("Current Head: %d\n", head->data);
-            // printf("Freeing %d\n", headTmp->data);
-            //FREE OLD HEAD
-            free(headTmp);
-            head->next = onlyDistinct(head->next);
-        }
-        else if(head->next->data == head->data && !head->next->next){
-            Node * tmp = head->next;
-            head->next = head->next->next;
-            free(tmp);
-            free(head);
-            return NULL;
-        }
-        head = onlyDistinct(head);
-    }
-    else{
+        // Recursively call the function on the new head
+        return onlyDistinct(head);
+    } else {
+        // No duplicates at head, proceed to the next node
         head->next = onlyDistinct(head->next);
+        return head;
     }
-    return head;
 
 }
 
@@ -175,8 +161,8 @@ int main(){
     // head = insertHead(head, 4);
     // head = insertHead(head, 4);
     // head = insertHead(head, 3);
-    // head = insertHead(head, 3);
-    // head = insertHead(head, 2);
+    head = insertHead(head, 3);
+    head = insertHead(head, 2);
     head = insertHead(head, 1);
     head = insertHead(head, 1);
     // head = insertHead(head, 1);
