@@ -80,6 +80,69 @@ Node * deleteByValue(Node *head, int data){
 
 }
 
+//this will delete duplicates in a sorted list. Will leave only first occurrence.
+Node * deleteDuplicates(Node * head){
+    if(head == NULL){
+        return head;
+    }
+
+    if(head->next != NULL && head->next->data == head->data){
+        Node * tmp = head->next;
+        head->next = head->next->next;
+        free(tmp);
+        head = deleteDuplicates(head);
+    }
+    else{
+        head->next = deleteDuplicates(head->next);
+    }
+
+    return head;
+
+}
+
+Node * onlyDistinct(Node * head){
+    if(head == NULL){
+        printf("reached NULL\n");
+        return head;
+    }
+
+    //if the next value is the same as the head
+    if(head->next != NULL && head->next->data == head->data){
+        //delete next value and set new next
+        Node * tmp = head->next;
+        head->next = head->next->next;
+        free(tmp);
+
+        //checking new-next value to see if its the same as current head
+        if(head->next != NULL && head->next->data != head->data){
+            Node * tmp = head->next;
+            head->next = head->next->next;
+            free(tmp);
+            //if not, then we set the new, not the same, value as the head
+            Node * headTmp = head;
+            head = head->next;
+            // printf("Current Head: %d\n", head->data);
+            // printf("Freeing %d\n", headTmp->data);
+            //FREE OLD HEAD
+            free(headTmp);
+            head->next = onlyDistinct(head->next);
+        }
+        else if(head->next->data == head->data && !head->next->next){
+            Node * tmp = head->next;
+            head->next = head->next->next;
+            free(tmp);
+            free(head);
+            return NULL;
+        }
+        head = onlyDistinct(head);
+    }
+    else{
+        head->next = onlyDistinct(head->next);
+    }
+    return head;
+
+}
+
 Node * moveHeadNearTail(Node * head) {
     if(head->next->next == NULL){
         return head;
@@ -108,6 +171,15 @@ void printList(Node *head){
 int main(){
     Node * head = NULL;
     int option = 0;
+    // head = insertHead(head, 5);
+    // head = insertHead(head, 4);
+    // head = insertHead(head, 4);
+    // head = insertHead(head, 3);
+    // head = insertHead(head, 3);
+    // head = insertHead(head, 2);
+    head = insertHead(head, 1);
+    head = insertHead(head, 1);
+    // head = insertHead(head, 1);
     while(true){
         printf("Linked List Menu: \n");
         printf("1. Insert New Node: \n");
@@ -152,7 +224,7 @@ int main(){
             break;
         case 2:
             printf("/////////////////////////////////////////////////\n");
-            printf("Delete by 1.Head, 2.Tail or 3.Value?\n");
+            printf("Delete by 1.Head, 2.Tail 3.Value or 4. Delete All Duplicates?\n");
             int delChoice = 0;
             scanf("%d", &delChoice);
             if(delChoice == 1){
@@ -168,6 +240,21 @@ int main(){
                 int numDel;
                 scanf("%d", &numDel);
                 head = deleteByValue(head, numDel);
+            }
+            else if(delChoice == 4){
+                printf("Leave Only 1. Distinct or 2. no?\n");
+                int distinct;
+                scanf("%d", &distinct);
+                if(distinct == 1){
+                    printf("Leaving only Distinct\n");
+                    head = onlyDistinct(head);
+                }
+                else if (distinct == 2)
+                { 
+                    printf("Deleting all duplicates\n");
+                    head = deleteDuplicates(head);
+                }
+                
             }
             printf("/////////////////////////////////////////////////\n");
             printf("\n");

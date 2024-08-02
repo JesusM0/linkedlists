@@ -29,74 +29,19 @@ Node* makeNode(int val) {
 }
 
 int enqueue(Queue * qPtr, int data){
-    //create a temporary Node pointer to access node structs fields
-    Node * temp = makeNode(data);
-
-    //if temp was successfully allocated
-    if(temp){ 
-        temp->data = data;
-        temp->next = NULL;
-
-        if(qPtr->back != NULL){
-            qPtr->back->next = temp;
-        } 
-        qPtr->back = temp;
-
-        if(qPtr->front == NULL){
-            qPtr->front = temp;
-        }
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    
 }
 
 int dequeue(Queue * qptr){
-    Node * tmp;
-    int ret;
-
-    if (qptr->front == NULL){
-        printf("Queue is Empty\n");
-        return EMPTY;
-    }
-    printf("Dequeueing %d....\n", qptr->front->data);
-
-    ret = qptr->front->data;
-    tmp = qptr->front;
-
-    qptr->front = qptr->front->next;
-
-    if(!qptr->front){
-        qptr->back = NULL;
-    }
-
-    free(tmp);
-
-    return ret;
+  
 }
 
 void addFront(Queue * qPtr, int data){
-    Node * newNode = makeNode(data);
-
-    if(!qPtr->front){
-        qPtr->front = qPtr->back = newNode;
-        return;
-    }
-
-    newNode->next = qPtr->front;
-    qPtr->front = newNode;
+    
 }
 
 int front(Queue * qPtr){
-    if(qPtr->front){
-        printf("Current Front is: %d....\n", qPtr->front->data);
-        return qPtr->front->data;
-    }
-    if(!qPtr->front){
-        printf("Queue is Empty\n");
-        return EMPTY;
-    }
+   
 }
 
 void printQueue(Node *front) {
