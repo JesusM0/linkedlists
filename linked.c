@@ -175,6 +175,21 @@ void insertAfterN(Node* head, int M, int N){
     insertAfterN(head->next, M, N);
 }
 
+void markEven(Node *head){
+    if(!head){
+        return;
+    }
+
+    if(head->data % 2 == 0){
+        Node * newNode = (Node *) malloc(sizeof(Node));
+        newNode->data = -1;
+        newNode->next = head->next;
+        head->next = newNode;
+    }
+    markEven(head->next);
+}
+
+
 
 void printList(Node *head){
     if(head == NULL){
@@ -193,12 +208,12 @@ int main(){
     // head = insertHead(head, 4);
     // head = insertHead(head, 4);
     // head = insertHead(head, 3);
-    head = insertTail(head, 3);
+    head = insertTail(head, 2);
     head = insertTail(head, 6);
-    head = insertTail(head, 4);
-    head = insertTail(head, 6);
-    head = insertTail(head, 6);
-    head = insertTail(head, 5);
+    head = insertTail(head, 7);
+    head = insertTail(head, 1);
+    // head = insertTail(head, 3);
+    head = insertTail(head, 8);
     // head = insertTail(head, 7);
     // head = insertTail(head, 9);
     // head = insertHead(head, 1);
@@ -210,7 +225,8 @@ int main(){
         printf("4. Move Head Near Tail\n");
         printf("5. Above Threshold\n");
         printf("6. Insert After N\n");
-        printf("7. Exit \n");
+        printf("7. Mark Even\n");
+        printf("8. Exit \n");
         scanf("%d", &option);
         printf("\n");
         switch (option)
@@ -307,6 +323,9 @@ int main(){
             insertAfterN(head, M, N);
             break;
         case 7:
+            markEven(head);
+            break;
+        case 8:
             printf("BYE BYE\n");
             exit(0);
             break;
