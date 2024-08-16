@@ -157,7 +157,22 @@ int aboveThreshold(Node* head, int limit) {
     if(head->data > limit){
         count++;
     }
-    return count + aboveThreshold(head->next, limit);
+    count += aboveThreshold(head->next, limit);
+    return count;
+}
+
+void insertAfterN(Node* head, int M, int N){
+    if(!head){
+        return;
+    }
+
+    if(head->data == N){
+        Node * newNode = (Node *) malloc(sizeof(Node));
+        newNode->data = M;
+        newNode->next = head->next;
+        head->next = newNode;
+    }
+    insertAfterN(head->next, M, N);
 }
 
 
@@ -179,13 +194,13 @@ int main(){
     // head = insertHead(head, 4);
     // head = insertHead(head, 3);
     head = insertTail(head, 3);
-    head = insertTail(head, 8);
-    head = insertTail(head, 8);
     head = insertTail(head, 6);
-    head = insertTail(head, 7);
+    head = insertTail(head, 4);
+    head = insertTail(head, 6);
+    head = insertTail(head, 6);
     head = insertTail(head, 5);
-    head = insertTail(head, 7);
-    head = insertTail(head, 9);
+    // head = insertTail(head, 7);
+    // head = insertTail(head, 9);
     // head = insertHead(head, 1);
     while(true){
         printf("Linked List Menu: \n");
@@ -194,7 +209,8 @@ int main(){
         printf("3. Print List \n");
         printf("4. Move Head Near Tail\n");
         printf("5. Above Threshold\n");
-        printf("6. Exit \n");
+        printf("6. Insert After N\n");
+        printf("7. Exit \n");
         scanf("%d", &option);
         printf("\n");
         switch (option)
@@ -283,6 +299,14 @@ int main(){
             printf("%d\n",aboveThreshold(head, limit));
             break;
         case 6:
+            int M, N;
+            printf("Enter the M\n");
+            scanf("%d", &M);
+            printf("Enter the N\n");
+            scanf("%d", &N);
+            insertAfterN(head, M, N);
+            break;
+        case 7:
             printf("BYE BYE\n");
             exit(0);
             break;
