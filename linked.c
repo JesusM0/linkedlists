@@ -147,6 +147,20 @@ Node * moveHeadNearTail(Node * head) {
     return head;
 }
 
+int aboveThreshold(Node* head, int limit) {
+    int count = 0;
+
+    if(!head){
+        return count;
+    }
+
+    if(head->data > limit){
+        count++;
+    }
+    return count + aboveThreshold(head->next, limit);
+}
+
+
 void printList(Node *head){
     if(head == NULL){
         printf("NULL\n");
@@ -164,10 +178,14 @@ int main(){
     // head = insertHead(head, 4);
     // head = insertHead(head, 4);
     // head = insertHead(head, 3);
-    head = insertHead(head, 3);
-    head = insertHead(head, 2);
-    head = insertHead(head, 1);
-    head = insertHead(head, 1);
+    head = insertTail(head, 3);
+    head = insertTail(head, 8);
+    head = insertTail(head, 8);
+    head = insertTail(head, 6);
+    head = insertTail(head, 7);
+    head = insertTail(head, 5);
+    head = insertTail(head, 7);
+    head = insertTail(head, 9);
     // head = insertHead(head, 1);
     while(true){
         printf("Linked List Menu: \n");
@@ -175,7 +193,8 @@ int main(){
         printf("2. Delete Node \n");
         printf("3. Print List \n");
         printf("4. Move Head Near Tail\n");
-        printf("5. Exit \n");
+        printf("5. Above Threshold\n");
+        printf("6. Exit \n");
         scanf("%d", &option);
         printf("\n");
         switch (option)
@@ -258,6 +277,12 @@ int main(){
             head = moveHeadNearTail(head);
             break;
         case 5:
+            int limit;
+            printf("Enter the Limit\n");
+            scanf("%d", &limit);
+            printf("%d\n",aboveThreshold(head, limit));
+            break;
+        case 6:
             printf("BYE BYE\n");
             exit(0);
             break;
