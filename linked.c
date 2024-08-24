@@ -147,35 +147,7 @@ Node * moveHeadNearTail(Node * head) {
     return head;
 }
 
-int aboveThreshold(Node* head, int limit) {
-    int count = 0;
-
-    if(!head){
-        return count;
-    }
-
-    if(head->data > limit){
-        count++;
-    }
-    count += aboveThreshold(head->next, limit);
-    return count;
-}
-
-void insertAfterN(Node* head, int M, int N){
-    if(!head){
-        return;
-    }
-
-    if(head->data == N){
-        Node * newNode = (Node *) malloc(sizeof(Node));
-        newNode->data = M;
-        newNode->next = head->next;
-        head->next = newNode;
-    }
-    insertAfterN(head->next, M, N);
-}
-
-void markEven(Node *head){
+void markEven(Node * head){
     if(!head){
         return;
     }
@@ -189,6 +161,22 @@ void markEven(Node *head){
     markEven(head->next);
 }
 
+// void markEven(Node * head){
+//     Node * tmp = head;
+
+//     while(tmp != NULL){
+//         if(tmp->data % 2 == 0){
+//             Node * newNode = (Node *) malloc(sizeof(Node));
+//             newNode->data = -1;
+//             newNode->next = tmp->next;
+//             tmp->next = newNode;
+//             tmp = newNode->next;
+//         }
+//         else{
+//             tmp = tmp->next;
+//         }
+//     }
+// }
 
 
 void printList(Node *head){
@@ -212,7 +200,7 @@ int main(){
     head = insertTail(head, 6);
     head = insertTail(head, 7);
     head = insertTail(head, 1);
-    // head = insertTail(head, 3);
+    head = insertTail(head, 3);
     head = insertTail(head, 8);
     // head = insertTail(head, 7);
     // head = insertTail(head, 9);
@@ -312,7 +300,7 @@ int main(){
             int limit;
             printf("Enter the Limit\n");
             scanf("%d", &limit);
-            printf("%d\n",aboveThreshold(head, limit));
+            // printf("%d\n",aboveThreshold(head, limit));
             break;
         case 6:
             int M, N;
@@ -320,7 +308,7 @@ int main(){
             scanf("%d", &M);
             printf("Enter the N\n");
             scanf("%d", &N);
-            insertAfterN(head, M, N);
+            // insertAfterN(head, M, N);
             break;
         case 7:
             markEven(head);
